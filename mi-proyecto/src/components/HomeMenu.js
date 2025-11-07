@@ -8,18 +8,16 @@ import Comentario from "../screens/Comentario"
 
 const Stack = createNativeStackNavigator()
 
-export default function HomeMenu () {
+function HomeMenu () {
   return (
     
      
         <Stack.Navigator>
           <Stack.Screen name="Home" component={Home} options= { {headerShown: false}}/>
           <Stack.Screen name="Comentario" component={Comentario} options= { {headerShown: false}}/>
-          
         </Stack.Navigator>
       
    
   );
 }
-
-
+export default HomeMenu;

@@ -9,7 +9,7 @@ import NavegacionTab from "./src/components/NavegacionTab"
 
 const Stack = createNativeStackNavigator()
 
-export default function App() {
+function App() {
   return (
   
       <NavigationContainer>
@@ -23,4 +23,4 @@ export default function App() {
   );
 }
 
-
+export default App;
