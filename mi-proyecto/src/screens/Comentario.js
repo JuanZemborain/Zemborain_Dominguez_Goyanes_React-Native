@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Pressable, TextInput } from 'react-native';
 
-class Home extends Component{
+class Comentario extends Component{
     constructor(props){
        super(props); 
        this.state = {
@@ -12,7 +12,7 @@ class Home extends Component{
     render(){
          return(
             <view>
-                <Text> estas en la home</Text>
+                <Text> Comentario</Text>
             </view>
          )
     }
@@ -21,4 +21,4 @@ class Home extends Component{
     
 }
 
-export default Home
+export default Comentario
