@@ -20,7 +20,7 @@ class NuevoPost extends Component {
     })
     .then(() => {
       this.setState({ description: '' });
-      this.props.navigation.navigate('Home');
+      this.props.navigation.navigate('HomeMenu');
     })
     .catch(error => {
       console.log(error);

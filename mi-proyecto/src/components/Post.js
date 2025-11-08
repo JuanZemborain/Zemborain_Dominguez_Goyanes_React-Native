@@ -50,6 +50,15 @@ class Post extends Component {
       }
     }
 
+    iraComentarios(){
+      console.log("funcion para ir a comentarios enviando la informacion");
+      
+    }
+
+    borrarPosteo(){
+      db.collection("posts").doc(this.props.postId).delete()
+    }
+
     render() {
         return (
         <View style={styles.container}>
@@ -57,10 +66,22 @@ class Post extends Component {
             <Text style={styles.description}>{this.props.postData.description}</Text>
 
             <Text style={styles.likesCount}> Likes: {this.state.likesCount}</Text>
-
-            <Pressable onPress={() => this.actualizarLikes()} style={styles.button}>
+            {this.props.origen == "Home" ? 
+            <React.Fragment>
+              <Pressable onPress={() => this.actualizarLikes()} style={styles.button}>
               <Text style={styles.buttonText}> {this.state.liked ? 'Quitar like' : 'Like'} </Text>
             </Pressable>
+            <Pressable onPress={() => this.iraComentarios()} style={styles.button}>
+              <Text style={styles.buttonText}> Ir a comentarios </Text>
+            </Pressable>
+            </React.Fragment>
+            : null}
+
+            {this.props.origen == "Profile" ? 
+            
+              <Pressable onPress={() => this.borrarPosteo()} style={styles.button}>
+              <Text style={styles.buttonText}> borrar posteo </Text>
+            </Pressable> :null }
         </View>
         );
     }

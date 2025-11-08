@@ -55,7 +55,7 @@ class Profile extends Component {
                     data={this.state.posteos}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
-                    <Post postData={item.data} postId={item.id} />
+                    <Post postData={item.data} postId={item.id} origen={"Profile"}/>
                     )}
                 />
                 )}
