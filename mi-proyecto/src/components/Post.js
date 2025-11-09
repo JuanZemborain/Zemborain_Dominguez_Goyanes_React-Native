@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { db, auth } from '../firebase/config';
 import firebase from 'firebase';
+import { FontAwesome } from '@expo/vector-icons'
 
 class Post extends Component {
     constructor(props) {
@@ -69,8 +70,9 @@ class Post extends Component {
             <Text style={styles.likesCount}> Likes: {this.state.likesCount}</Text>
             {this.props.origen == "Home" ? 
             <React.Fragment>
-              <Pressable onPress={() => this.actualizarLikes()} style={styles.button}>
-              <Text style={styles.buttonText}> {this.state.liked ? 'Quitar like' : 'Like'} </Text>
+            <Pressable onPress={() => this.actualizarLikes()} style={styles.button}>
+              <FontAwesome name={this.state.liked ? 'heart' : 'heart-o'}  
+                            size={26} color={this.state.liked ? 'red' : 'gray'}/>
             </Pressable>
             <Pressable onPress={() => this.iraComentarios()} style={styles.button}>
               <Text style={styles.buttonText}> Ir a comentarios </Text>

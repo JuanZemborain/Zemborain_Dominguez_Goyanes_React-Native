@@ -30,8 +30,8 @@ class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Home</Text>
-
+        <Text style={styles.title}>Bienvenido a Aurora</Text>
+        <Text style={styles.subTitle}>"Tu espacio para compartir la música que te mueve y descubrir nuevos sonidos"</Text>
         <FlatList
           data={this.state.posteos}
           keyExtractor={(item) => item.id}
@@ -57,19 +57,15 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
   },
-    button: {
-    backgroundColor: '#28a745',
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: '#28a745'
-  },
-  buttonText: {
-    color:'#fff',
-    fontWeight:'bold',
-    textAlign:'center'
-  }
+  subTitle: {
+    fontSize: 16,
+    color: '#555',            
+    textAlign: 'center',      
+    marginBottom: 25,         
+    fontStyle: 'italic',      
+    paddingHorizontal: 20,    
+},
+    
 });
 
 export default Home;
