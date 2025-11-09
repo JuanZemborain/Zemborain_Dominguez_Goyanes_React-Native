@@ -50,9 +50,10 @@ class Post extends Component {
       }
     }
 
-    iraComentarios(){
-      console.log("funcion para ir a comentarios enviando la informacion");
-      
+    iraComentarios() {
+        this.props.navigation.navigate('Comentario', {
+            postId: this.props.postId
+        });
     }
 
     borrarPosteo(){

@@ -36,7 +36,7 @@ class Home extends Component {
           data={this.state.posteos}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <Post postData={item.data} postId={item.id} origen={"Home"}/>
+            <Post postData={item.data} postId={item.id} origen={"Home"} navigation={this.props.navigation}/>
           )}
         />
         

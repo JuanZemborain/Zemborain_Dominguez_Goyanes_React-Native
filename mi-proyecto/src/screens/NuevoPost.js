@@ -16,7 +16,8 @@ class NuevoPost extends Component {
         createdAt: Date.now(),
         owner: auth.currentUser.email,
         description: this.state.description,
-        likes: []
+        likes: [],
+        comentarios: []
     })
     .then(() => {
       this.setState({ description: '' });

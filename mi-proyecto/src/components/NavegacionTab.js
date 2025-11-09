@@ -7,7 +7,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import HomeMenu from "./HomeMenu"
 
 
-const Tab= createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function NavegacionTab(){
     return(
