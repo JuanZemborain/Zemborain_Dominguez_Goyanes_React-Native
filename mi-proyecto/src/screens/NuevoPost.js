@@ -33,10 +33,11 @@ class NuevoPost extends Component {
     return (
         <View style={styles.container}>
         <Text style={styles.title}>Nuevo Post</Text>
-        {/* <ImageBackground>
-          source={{ uri: 'https://static4.depositphotos.com/1012125/338/i/950/depositphotos_3388926-stock-photo-background-with-musical-notes.jpg' }}
-          style={styles.backgroundImage}
-        </ImageBackground> */}
+       
+        <Image
+         source={{uri: 'https://e1.pxfuel.com/desktop-wallpaper/538/178/desktop-wallpaper-colorful-music-background.jpg',}} 
+         style={styles.backgroundImage}
+        />
 
         <TextInput
           style={styles.input}
@@ -63,7 +64,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F7F9FC",
     padding: 25,
-    backgroundImage: "url(https://e1.pxfuel.com/desktop-wallpaper/538/178/desktop-wallpaper-colorful-music-notes-3d-colored-music.jpg)"
+    backgroundImage: "url(https://i.pinimg.com/736x/6c/d9/3b/6cd93b821fcc13847d63d97184870c19.jpg)"
+
   },
   title: {
     fontSize: 24,

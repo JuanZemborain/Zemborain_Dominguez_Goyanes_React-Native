@@ -99,12 +99,12 @@ class Register extends Component{
 
                     <Text style={styles.error}> {this.state.error}</Text>
 
-                     <Pressable onPress={() => this.OnSubmit()}>
-                        <Text>Crear Cuenta</Text>
+                     <Pressable onPress={() => this.OnSubmit()} style={styles.button}>
+                        <Text style={styles.buttonText} >Crear Cuenta</Text>
                     </Pressable>
 
                     <Pressable onPress={() => this.props.navigation.navigate("Login")}>
-                        <Text>Ya tenes una cuenta ir a Login</Text>
+                        <Text style={styles.linkText} >Ya tengo cuenta </Text>
                     </Pressable> 
 
                     
@@ -122,6 +122,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
+    backgroundImage: "url(https://png.pngtree.com/background/20250110/original/pngtree-music-guitar-simple-and-elegant-picture-image_15185851.jpg)"
+  ,
   },
   title: {
     fontSize: 28,

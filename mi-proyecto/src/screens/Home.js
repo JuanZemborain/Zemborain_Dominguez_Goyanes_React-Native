@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 10,
     marginTop: 10,
-    flex: 1
+    flex: 1,
+    backgroundImage: "url(https://i.pinimg.com/736x/6c/d9/3b/6cd93b821fcc13847d63d97184870c19.jpg)"
   },
   title: {
     fontSize: 24,

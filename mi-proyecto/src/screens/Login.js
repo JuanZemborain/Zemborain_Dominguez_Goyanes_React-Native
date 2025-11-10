@@ -86,6 +86,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
+    backgroundImage: "url(https://png.pngtree.com/background/20250110/original/pngtree-music-guitar-simple-and-elegant-picture-image_15185851.jpg)"
+  ,
   },
   title: {
     fontSize: 28,
