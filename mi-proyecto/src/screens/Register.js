@@ -41,11 +41,22 @@ class Register extends Component{
 
          auth.createUserWithEmailAndPassword(this.state.email,this.state.password)
         .then((response)=>{
-           db.collection("users").add({username: this.state.username, email:this.state.email})
+            
+            console.log(response);
+
+             auth.signOut()
+            
+            db.collection("users").add({username: this.state.username, email:this.state.email})
+
+           
         })
-        .then(() => {
+        .then((res) => {
             this.props.navigation.navigate("Login")
+            console.log(res);
+            
+            console.log(auth.currentUser)
         })
+        
         .catch( error => {
             console.log(error);
             
@@ -89,8 +100,12 @@ class Register extends Component{
                     <Text style={styles.error}> {this.state.error}</Text>
 
                      <Pressable onPress={() => this.OnSubmit()}>
-                        <Text>Ir a Login</Text>
+                        <Text>Crear Cuenta</Text>
                     </Pressable>
+
+                    <Pressable onPress={() => this.props.navigation.navigate("Login")}>
+                        <Text>Ya tenes una cuenta ir a Login</Text>
+                    </Pressable> 
 
                     
 

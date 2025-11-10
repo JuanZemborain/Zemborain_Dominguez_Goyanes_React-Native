@@ -13,7 +13,9 @@ class Login extends Component {
     }
     componentDidMount(){
         auth.onAuthStateChanged(user => {
-            if (user !=null){
+            if (user){
+                console.log(user);
+                
                 this.props.navigation.navigate("NavegacionTab");
             }
         })
@@ -21,7 +23,7 @@ class Login extends Component {
     OnSubmit() {
         console.log(this.state.email);
         console.log(this.state.password);
-            auth.signInWithEmailAndPassword(this.state.email,this.state.password)
+        auth.signInWithEmailAndPassword(this.state.email,this.state.password)
         .then((response) => {
             
             this.props.navigation.navigate("NavegacionTab");

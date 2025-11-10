@@ -13,6 +13,8 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    console.log("estamos en home");
+    
     db.collection('posts').orderBy('createdAt', 'desc').onSnapshot(
       (docs) => {
         let posts = [];

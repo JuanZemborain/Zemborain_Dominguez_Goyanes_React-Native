@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, Pressable, StyleSheet } from 'react-native';
+import { Text, View, TextInput, Pressable, StyleSheet, Image, ImageBackground } from 'react-native';
 import { db, auth } from '../firebase/config';
 
 class NuevoPost extends Component {
@@ -31,8 +31,12 @@ class NuevoPost extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+        <View style={styles.container}>
         <Text style={styles.title}>Nuevo Post</Text>
+        {/* <ImageBackground>
+          source={{ uri: 'https://static4.depositphotos.com/1012125/338/i/950/depositphotos_3388926-stock-photo-background-with-musical-notes.jpg' }}
+          style={styles.backgroundImage}
+        </ImageBackground> */}
 
         <TextInput
           style={styles.input}
@@ -47,6 +51,9 @@ class NuevoPost extends Component {
 
         {this.state.error && <Text style={styles.error}>{this.state.error}</Text>}
       </View>
+
+      
+      
     );
   }
 }
@@ -56,6 +63,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F7F9FC",
     padding: 25,
+    backgroundImage: "url(https://e1.pxfuel.com/desktop-wallpaper/538/178/desktop-wallpaper-colorful-music-notes-3d-colored-music.jpg)"
   },
   title: {
     fontSize: 24,
@@ -86,6 +94,12 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: "600",
   },
+  backgroundImage: {
+  position: 'absolute',
+  width: '100%',
+  height: '100%',
+  resizeMode: 'cover',
+},
 });
 
 export default NuevoPost;
