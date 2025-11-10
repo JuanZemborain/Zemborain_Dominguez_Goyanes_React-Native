@@ -61,7 +61,7 @@ class Profile extends Component {
          <View style={styles.header}>
                 <Image source={logo} style={styles.logo} resizeMode="contain" />
                 <Text style={styles.title}>Mi Perfil 🎵</Text>
-            </View>
+          </View>
         <Text style={styles.subtitle}> Usuario: {this.state.username} </Text>
         <Text style={styles.subtitle}> Email: {auth.currentUser.email} </Text>
 
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   postSectionTitle: {
     fontSize: 20,
     fontWeight: '600',
-    marginTop: 25,
+    marginTop: 10,
     marginBottom: 10,
     color: '#333',
     textAlign: 'center',
@@ -132,13 +132,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 40,
-    marginBottom: 20,
+    marginTop: 0,
+    marginBottom: 0,
+    
    },
 
   logo: {
-    width: 150,
-    height: 150,
+    width: 100,
+    height: 100,
     marginRight: 10,
     borderRadius: 40, 
   },
