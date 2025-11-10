@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Pressable, FlatList } from 'react-native';
+import { Text, View, StyleSheet, Pressable, FlatList, Image } from 'react-native';
 import { db, auth } from '../firebase/config';
 import Post from '../components/Post';
+import logo from "../../assets/logo.png.png"
 
 class Profile extends Component {
   constructor(props) {
@@ -11,63 +12,68 @@ class Profile extends Component {
     };
   }
 
-    componentDidMount() {
-        db.collection('posts').where("owner", "==", auth.currentUser.email).onSnapshot(
-        (docs) => {
-            let posts = [];
-            docs.forEach(doc => {
-            posts.push({ id: 
-                doc.id, 
-                data: doc.data() });
-            });
-            this.setState({ posteos: posts });
-            console.log('Posteos:', this.state.posteos);
-        },
-        (error) => console.log(error)
-        );
+  componentDidMount() {
+    db.collection('posts').where("owner", "==", auth.currentUser.email).onSnapshot(
+      (docs) => {
+        let posts = [];
+        docs.forEach(doc => {
+          posts.push({
+            id:
+              doc.id,
+            data: doc.data()
+          });
+        });
+        this.setState({ posteos: posts });
+        console.log('Posteos:', this.state.posteos);
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  logout() {
+    auth.signOut()
+      .then(() => {
+        this.props.navigation.navigate('Login');
+      })
+      .catch(error => console.log(error));
+  }
+
+  render() {
+
+    if (!auth.currentUser) {
+      return <Text>Cargando perfil...</Text>
     }
 
-    logout() {
-        auth.signOut()
-        .then(() => {
-            this.props.navigation.navigate('Login');
-        })
-        .catch(error => console.log(error));
-    }
+    return (
+      <View style={styles.container}>
 
-    render(){
+         <View style={styles.header}>
+                <Image source={logo} style={styles.logo} resizeMode="contain" />
+                <Text style={styles.title}>Mi Perfil 🎵</Text>
+            </View>
+        <Text style={styles.subtitle}> Usuario: {auth.currentUser.displayName} </Text>
+        <Text style={styles.subtitle}> Email: {auth.currentUser.email} </Text>
 
-        if (!auth.currentUser) {
-            return <Text>Cargando perfil...</Text>
-        }
+        <Text style={styles.postSectionTitle}> Mis Posteos: </Text>
 
-        return(
-            <View style={styles.container}>
-            <Text style={styles.title}> Mi Perfil </Text>
-
-            <Text style={styles.subtitle}> Usuario: {auth.currentUser.displayName} </Text>
-            <Text style={styles.subtitle}> Email: {auth.currentUser.email} </Text>
-
-            <Text style={styles.postSectionTitle}> Mis Posteos: </Text>
-
-            {this.state.posteos.length === 0 ? <Text style={styles.subtitle}>No tenés posteos todavía.</Text> : (
-                <FlatList
-                    data={this.state.posteos}
-                    keyExtractor={(item) => item.id}
-                    renderItem={({ item }) => (
-                    <Post postData={item.data} postId={item.id} origen={"Profile"}/>
-                    )}
-                />
-                )}
+        {this.state.posteos.length === 0 ? <Text style={styles.subtitle}>No tenés posteos todavía.</Text> : (
+          <FlatList
+            data={this.state.posteos}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <Post postData={item.data} postId={item.id} origen={"Profile"} />
+            )}
+          />
+        )}
 
 
-            <Pressable onPress={ () => this.logout() } style={styles.button}>
-                <Text style={styles.buttonText}> Logout </Text>
-            </Pressable>
+        <Pressable onPress={() => this.logout()} style={styles.button}>
+          <Text style={styles.buttonText}> Logout </Text>
+        </Pressable>
 
-        </View>
+      </View>
     )
-}
+  }
 }
 
 const styles = StyleSheet.create({
@@ -110,6 +116,20 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     textAlign: 'center',
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40,
+    marginBottom: 20,
+   },
+
+  logo: {
+    width: 150,
+    height: 150,
+    marginRight: 10,
+    borderRadius: 40, 
   },
 });
 

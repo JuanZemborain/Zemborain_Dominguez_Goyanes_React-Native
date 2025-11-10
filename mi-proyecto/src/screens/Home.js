@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, FlatList } from 'react-native';
+import { Text, View, StyleSheet, FlatList, Image } from 'react-native';
 import { db } from '../firebase/config';
 import Post from '../components/Post';
+import logo from "../../assets/logo.png.png"
 
 class Home extends Component {
   constructor(props) {
@@ -30,7 +31,13 @@ class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Bienvenido a Aurora</Text>
+
+    <View style={styles.header}>
+        <Image source={logo} style={styles.logo} resizeMode="contain" />
+        <Text style={styles.title}>🎵 Bienvenido a Aurora 🎵</Text>
+    </View>
+ 
+    
         <Text style={styles.subTitle}>"Tu espacio para compartir la música que te mueve y descubrir nuevos sonidos"</Text>
         <FlatList
           data={this.state.posteos}
@@ -46,6 +53,7 @@ class Home extends Component {
 }
 
 const styles = StyleSheet.create({
+   
   container: {
     paddingHorizontal: 10,
     marginTop: 20,
@@ -54,8 +62,24 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
+    color: "#2C3E50",
     marginBottom: 20,
     textAlign: 'center',
+    marginTop: 60,
+  },
+   header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40,
+    marginBottom: 20,
+   },
+
+  logo: {
+    width: 150,
+    height: 150,
+    marginRight: 10,
+    borderRadius: 40, 
   },
   subTitle: {
     fontSize: 16,
