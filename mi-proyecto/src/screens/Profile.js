@@ -8,7 +8,8 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posteos: []
+      posteos: [],
+      username: ''
     };
   }
 
@@ -25,6 +26,16 @@ class Profile extends Component {
         });
         this.setState({ posteos: posts });
         console.log('Posteos:', this.state.posteos);
+      },
+      (error) => console.log(error)
+    );
+
+    db.collection('users').where('email', '==', auth.currentUser.email).onSnapshot(
+      (docs) => {
+        docs.forEach(doc => {
+          const userData = doc.data();
+          this.setState({ username: userData.username });
+        });
       },
       (error) => console.log(error)
     );
@@ -51,7 +62,7 @@ class Profile extends Component {
                 <Image source={logo} style={styles.logo} resizeMode="contain" />
                 <Text style={styles.title}>Mi Perfil 🎵</Text>
             </View>
-        <Text style={styles.subtitle}> Usuario: {auth.currentUser.displayName} </Text>
+        <Text style={styles.subtitle}> Usuario: {this.state.username} </Text>
         <Text style={styles.subtitle}> Email: {auth.currentUser.email} </Text>
 
         <Text style={styles.postSectionTitle}> Mis Posteos: </Text>
