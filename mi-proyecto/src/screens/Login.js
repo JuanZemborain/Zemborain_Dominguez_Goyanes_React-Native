@@ -40,7 +40,7 @@ class Login extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.title}> Formulario de login </Text>
+                <Text style={styles.title}> Login </Text>
 
                 <TextInput
                     style={styles.input}
