@@ -21,6 +21,11 @@ class Register extends Component{
 
         if (this.state.username.length < 4){
             this.setState({error: "el nombre de usuario tiene que tener al menos 4 caracteres"})
+
+        }
+
+        if(this.state.username.length == 0){
+            this.setState({error: "debe crear un nombre de usuario"})
         }
 
 
@@ -71,13 +76,10 @@ class Register extends Component{
                     <Text> {this.state.error}</Text>
 
                      <Pressable onPress={() => this.OnSubmit()}>
-                        <Text>Registrate</Text>
+                        <Text>Ir a Login</Text>
                     </Pressable>
 
-                     <Pressable onPress={() => this.props.navigation.navigate("Login")}>
-                        <Text> ir a Login</Text>
-                    </Pressable>
-
+                    
 
                 
             </view>
