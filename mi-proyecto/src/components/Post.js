@@ -9,7 +9,7 @@ class Post extends Component {
         super(props);
         this.state = {  
             liked: false,
-            likesCount: 0
+
         };
     }
 
@@ -17,7 +17,7 @@ class Post extends Component {
       const likes = this.props.postData.likes;
       this.setState({
         liked: likes.includes(auth.currentUser.email),
-        likesCount: likes.length
+
       })
     }
 
@@ -31,7 +31,7 @@ class Post extends Component {
           .then(() => {
             this.setState({
               liked: false,
-              likesCount: this.state.likesCount - 1
+
             });
           })
           .catch(error => console.log(error));
@@ -44,7 +44,7 @@ class Post extends Component {
           .then(() => {
             this.setState({
               liked: true,
-              likesCount: this.state.likesCount + 1
+
             });
           })
           .catch(error => console.log(error));
@@ -57,42 +57,27 @@ class Post extends Component {
         });
     }
 
-    borrarPosteo(){
-      db.collection("posts").doc(this.props.postId).delete()
-    }
-
     render() {
         return (
-<View style={styles.postCard}>
-  <Text style={styles.postTitle}>{this.props.postData.owner}</Text>
-  <Text style={styles.postText}>{this.props.postData.description}</Text>
+    <View style={styles.postCard}>
+        <Text style={styles.postTitle}>{this.props.postData.owner}</Text>
+        <Text style={styles.postText}>{this.props.postData.description}</Text>
 
-  <Text style={styles.likesCount}>Likes: {this.state.likesCount}</Text>
+        <Text style={styles.likesCount}>Likes: {this.props.postData.likes.length}</Text>
 
-  {this.props.origen === "Home" ? (
-    <>
-      <Pressable onPress={() => this.actualizarLikes()} style={styles.commentButton}>
-        <FontAwesome
-          name={this.state.liked ? 'heart' : 'heart-o'}
-          size={26}
-          color={this.state.liked ? 'red' : 'gray'}
-        />
-      </Pressable>
+            <Pressable onPress={() => this.actualizarLikes()} style={styles.commentButton}>
+                <FontAwesome
+                name={this.state.liked ? 'heart' : 'heart-o'}
+                size={26}
+                color={this.state.liked ? 'red' : 'gray'}
+                />
+            </Pressable>
 
-      <Pressable onPress={() => this.iraComentarios()} style={styles.commentButton}>
-        <Text style={styles.commentButtonText}>Ir a comentarios</Text>
-      </Pressable>
-    </>
-  ) : null}
-
-  {this.props.origen === "Profile" ? (
-    <Pressable onPress={() => this.borrarPosteo()} style={styles.commentButton}>
-      <Text style={styles.commentButtonText}>Borrar posteo</Text>
-    </Pressable>
-  ) : null}
-</View>
-        );
-    }
+            <Pressable onPress={() => this.iraComentarios()} style={styles.commentButton}>
+                <Text style={styles.commentButtonText}>Ir a comentarios</Text>
+            </Pressable>
+    </View>
+        );}
     }
 
 const styles = StyleSheet.create({
