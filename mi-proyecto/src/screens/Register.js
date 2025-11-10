@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Pressable } from 'react-native';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
 import {auth, db} from "../firebase/config"
 
 class Register extends Component{
@@ -45,10 +45,11 @@ class Register extends Component{
 
     render(){
         return(
-            <view>
-                <Text> Formulario de registro </Text>
+            <View style={styles.container}>
+                <Text style={styles.title}> Formulario de registro </Text>
 
                 <TextInput
+                        style={styles.input}
                         keyboardType="email-address"
                         placeholder="Email"
                         value={this.state.email}
@@ -56,33 +57,84 @@ class Register extends Component{
                     />
                 
                 <TextInput
+                        style={styles.input}
                         placeholder="Nombre de usuario"
                         value={this.state.username}
                         onChangeText={(text) => this.setState({ username: text })}
                     />
                 
                    <TextInput
+                        style={styles.input}
                         placeholder="Contraseña"
                         secureTextEntry={true}
                         value={this.state.password}
                         onChangeText={(text) => this.setState({ password: text })}
                     />
 
-                    <Text> {this.state.error}</Text>
+                    <Text style={styles.error}> {this.state.error}</Text>
 
-                     <Pressable onPress={() => this.OnSubmit()}>
-                        <Text>Registrate</Text>
+                     <Pressable onPress={() => this.OnSubmit()} style={styles.button}>
+                        <Text style={styles.buttonText}>Registrate</Text>
                     </Pressable>
 
                      <Pressable onPress={() => this.props.navigation.navigate("Login")}>
-                        <Text> ir a Login</Text>
+                        <Text style={styles.linkText}> ir a Login</Text>
                     </Pressable>
 
 
                 
-            </view>
+            </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F7F8FA', // Fondo claro grisáceo
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#2C3E50', // Gris azulado oscuro
+    marginBottom: 25,
+  },
+  input: {
+    width: '90%',
+    backgroundColor: '#FFFFFF',
+    borderColor: '#DADADA',
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 15,
+    fontSize: 16,
+    color: '#34495E',
+  },
+  button: {
+    backgroundColor: '#6C63FF', // Violeta suave
+    paddingVertical: 12,
+    paddingHorizontal: 40,
+    borderRadius: 10,
+    marginTop: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 17,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  linkText: {
+    color: '#6C63FF',
+    marginTop: 15,
+    fontSize: 15,
+  },
+});
 
 export default Register

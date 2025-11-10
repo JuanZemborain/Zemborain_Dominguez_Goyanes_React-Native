@@ -63,66 +63,75 @@ class Post extends Component {
 
     render() {
         return (
-        <View style={styles.container}>
-            <Text style={styles.owner}>{this.props.postData.owner}</Text>
-            <Text style={styles.description}>{this.props.postData.description}</Text>
+<View style={styles.postCard}>
+  <Text style={styles.postTitle}>{this.props.postData.owner}</Text>
+  <Text style={styles.postText}>{this.props.postData.description}</Text>
 
-            <Text style={styles.likesCount}> Likes: {this.state.likesCount}</Text>
-            {this.props.origen == "Home" ? 
-            <React.Fragment>
-            <Pressable onPress={() => this.actualizarLikes()} style={styles.button}>
-              <FontAwesome name={this.state.liked ? 'heart' : 'heart-o'}  
-                            size={26} color={this.state.liked ? 'red' : 'gray'}/>
-            </Pressable>
-            <Pressable onPress={() => this.iraComentarios()} style={styles.button}>
-              <Text style={styles.buttonText}> Ir a comentarios </Text>
-            </Pressable>
-            </React.Fragment>
-            : null}
+  <Text style={styles.likesCount}>Likes: {this.state.likesCount}</Text>
 
-            {this.props.origen == "Profile" ? 
-            
-              <Pressable onPress={() => this.borrarPosteo()} style={styles.button}>
-              <Text style={styles.buttonText}> borrar posteo </Text>
-            </Pressable> :null }
-        </View>
+  {this.props.origen === "Home" ? (
+    <>
+      <Pressable onPress={() => this.actualizarLikes()} style={styles.commentButton}>
+        <FontAwesome
+          name={this.state.liked ? 'heart' : 'heart-o'}
+          size={26}
+          color={this.state.liked ? 'red' : 'gray'}
+        />
+      </Pressable>
+
+      <Pressable onPress={() => this.iraComentarios()} style={styles.commentButton}>
+        <Text style={styles.commentButtonText}>Ir a comentarios</Text>
+      </Pressable>
+    </>
+  ) : null}
+
+  {this.props.origen === "Profile" ? (
+    <Pressable onPress={() => this.borrarPosteo()} style={styles.commentButton}>
+      <Text style={styles.commentButtonText}>Borrar posteo</Text>
+    </Pressable>
+  ) : null}
+</View>
         );
     }
     }
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderStyle: 'solid',
-    borderRadius: 6,
-    padding: 10,
-    marginVertical: 5
+    flex: 1,
+    backgroundColor: "#FDFEFF",
+    padding: 15,
   },
-  owner: {
-    fontWeight: 'bold',
-    marginBottom: 5
+  postCard: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 10,
+    padding: 15,
+    marginBottom: 15,
+    shadowColor: "#000",
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
   },
-  description: {
-    fontSize: 16
+  postTitle: {
+    fontSize: 20,
+    fontWeight: "600",
+    color: "#2C3E50",
+    marginBottom: 6,
   },
-  likesCount: {
+  postText: {
+    fontSize: 16,
+    color: "#5D6D7E",
+  },
+  commentButton: {
+    backgroundColor: "#6C63FF",
+    paddingVertical: 10,
+    borderRadius: 8,
     marginTop: 10,
-    fontStyle: 'italic'
   },
-  button: {
-    marginTop: 10,
-    backgroundColor: '#007bff',
-    paddingVertical: 6,
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: '#007bff'
+  commentButtonText: {
+    color: "#FFF",
+    textAlign: "center",
+    fontWeight: "500",
   },
-  buttonText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontWeight: 'bold'
-  }
 });
 
 export default Post;
