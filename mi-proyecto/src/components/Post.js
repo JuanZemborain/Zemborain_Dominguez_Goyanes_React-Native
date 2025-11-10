@@ -80,42 +80,51 @@ class Post extends Component {
         );}
     }
 
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FDFEFF",
-    padding: 15,
-  },
   postCard: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: '#FFFFFF',
     borderRadius: 10,
     padding: 15,
     marginBottom: 15,
-    shadowColor: "#000",
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 2,
+    alignItems: 'center',
   },
   postTitle: {
     fontSize: 20,
-    fontWeight: "600",
-    color: "#2C3E50",
+    fontWeight: '600',
+    color: '#2C3E50',
     marginBottom: 6,
+    textAlign: 'center',
   },
   postText: {
-    fontSize: 16,
-    color: "#5D6D7E",
+    fontSize: 18, 
+    color: '#5D6D7E',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  likesCount: {
+    fontSize: 14,
+    color: '#7D7D7D',
+    marginBottom: 10,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
   },
   commentButton: {
-    backgroundColor: "#6C63FF",
+    backgroundColor: '#6C63FF', 
     paddingVertical: 10,
+    paddingHorizontal: 40, 
+    alignItems: 'center',
     borderRadius: 8,
     marginTop: 10,
   },
   commentButtonText: {
-    color: "#FFF",
-    textAlign: "center",
-    fontWeight: "500",
+    color: '#FFF',
+    textAlign: 'center',
+    fontWeight: '500',
+    fontSize: 16,
   },
 });
 

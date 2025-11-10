@@ -8,7 +8,8 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posteos: []
+      posteos: [],
+      username: ''
     };
   }
 
@@ -25,6 +26,16 @@ class Profile extends Component {
         });
         this.setState({ posteos: posts });
         console.log('Posteos:', this.state.posteos);
+      },
+      (error) => console.log(error)
+    );
+
+    db.collection('users').where('email', '==', auth.currentUser.email).onSnapshot(
+      (docs) => {
+        docs.forEach(doc => {
+          const userData = doc.data();
+          this.setState({ username: userData.username });
+        });
       },
       (error) => console.log(error)
     );
@@ -50,8 +61,8 @@ class Profile extends Component {
          <View style={styles.header}>
                 <Image source={logo} style={styles.logo} resizeMode="contain" />
                 <Text style={styles.title}>Mi Perfil 🎵</Text>
-            </View>
-        <Text style={styles.subtitle}> Usuario: {auth.currentUser.displayName} </Text>
+          </View>
+        <Text style={styles.subtitle}> Usuario: {this.state.username} </Text>
         <Text style={styles.subtitle}> Email: {auth.currentUser.email} </Text>
 
         <Text style={styles.postSectionTitle}> Mis Posteos: </Text>
@@ -98,7 +109,7 @@ const styles = StyleSheet.create({
   postSectionTitle: {
     fontSize: 20,
     fontWeight: '600',
-    marginTop: 25,
+    marginTop: 10,
     marginBottom: 10,
     color: '#333',
     textAlign: 'center',
@@ -121,13 +132,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 40,
-    marginBottom: 20,
+    marginTop: 0,
+    marginBottom: 0,
+    
    },
 
   logo: {
-    width: 150,
-    height: 150,
+    width: 100,
+    height: 100,
     marginRight: 10,
     borderRadius: 40, 
   },

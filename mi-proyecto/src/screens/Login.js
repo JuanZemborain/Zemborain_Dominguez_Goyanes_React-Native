@@ -82,7 +82,7 @@ class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F7F8FA', // Fondo claro grisáceo
+    backgroundColor: '#F7F8FA', 
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#2C3E50', // Gris azulado oscuro
+    color: '#2C3E50', 
     marginBottom: 25,
   },
   input: {
@@ -105,15 +105,11 @@ const styles = StyleSheet.create({
     color: '#34495E',
   },
   button: {
-    backgroundColor: '#6C63FF', // Violeta suave
+    backgroundColor: '#6C63FF', 
     paddingVertical: 12,
     paddingHorizontal: 40,
     borderRadius: 10,
     marginTop: 10,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
   },
   buttonText: {
     color: '#FFFFFF',
