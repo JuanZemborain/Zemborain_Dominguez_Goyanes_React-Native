@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
    
   container: {
     paddingHorizontal: 10,
-    marginTop: 20,
+    marginTop: 10,
     flex: 1
   },
   title: {
@@ -65,14 +65,14 @@ const styles = StyleSheet.create({
     color: "#2C3E50",
     marginBottom: 20,
     textAlign: 'center',
-    marginTop: 60,
+    marginTop: 20,
   },
    header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 40,
-    marginBottom: 20,
+    marginTop: 0,
+    marginBottom: 10,
    },
 
   logo: {
