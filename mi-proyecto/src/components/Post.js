@@ -73,9 +73,18 @@ class Post extends Component {
                 />
             </Pressable>
 
-            <Pressable onPress={() => this.iraComentarios()} style={styles.commentButton}>
+            
+
+            {/* <Pressable onPress={() => this.iraComentarios()} style={styles.commentButton}>
                 <Text style={styles.commentButtonText}>Ir a comentarios</Text>
-            </Pressable>
+            </Pressable> */}
+
+
+          {this.props.origen !== "Profile" && (
+            <Pressable onPress={() => this.iraComentarios()} style={styles.commentButton}>
+             <Text style={styles.commentButtonText}>Ir a comentarios</Text>
+           </Pressable>
+      )}
     </View>
         );}
     }

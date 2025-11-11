@@ -59,7 +59,8 @@ class Comentario extends Component {
       <View style={styles.container}>
         <Text style={styles.title}>Comentarios</Text>
 
-        <Pressable onPress={() => this.props.navigation.navigate('HomeMenu', { screen: 'Home' })} style={styles.backButton}>
+        <Pressable onPress={() => 
+            this.props.navigation.navigate('HomeMenu', { screen: 'Home' })} style={styles.backButton}>
           <Text style={styles.backButtonText}>Volver</Text>
         </Pressable>
 
