@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Pressable, TextInput, StyleSheet } from 'react-native';
+import { View, Text, Pressable, TextInput, StyleSheet, ActivityIndicator } from 'react-native';
 import {auth} from "../firebase/config"
 
 class Login extends Component {
@@ -8,7 +8,8 @@ class Login extends Component {
         this.state = {
             email: "",
             password: "",
-            userName: ""
+            userName: "",
+            loading: false
         }
     }
     componentDidMount(){
@@ -25,7 +26,7 @@ class Login extends Component {
         console.log(this.state.password);
         auth.signInWithEmailAndPassword(this.state.email,this.state.password)
         .then((response) => {
-            
+            this.setState({loading: false});
             this.props.navigation.navigate("NavegacionTab");
         })
         .catch(error => {
@@ -38,6 +39,16 @@ class Login extends Component {
 
     
     render() {
+
+        if (this.state.loading) {
+            return (
+                <View style={styles.loadingContainer}>
+                    <ActivityIndicator size="large" color="#6C63FF" />
+                    <Text style={styles.texto}>Iniciando sesión...</Text>
+                </View>
+            );
+        }
+
         return (
             <View style={styles.container}>
                 <Text style={styles.title}> Login </Text>
@@ -124,6 +135,15 @@ const styles = StyleSheet.create({
     marginTop: 15,
     fontSize: 15,
   },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F7F8FA',
+    },
+    texto: {
+        marginTop: 10,
+    }
 });
 
 export default Login 

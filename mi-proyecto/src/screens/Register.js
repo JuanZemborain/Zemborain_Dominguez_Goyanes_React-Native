@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Pressable } from 'react-native';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet, ActivityIndicator } from 'react-native';
 import { auth, db } from "../firebase/config"
 
 class Register extends Component {
@@ -10,7 +10,8 @@ class Register extends Component {
             email: "",
             username: "",
             password: "",
-            error: ""
+            error: "",
+            loading: false
         }
     }
 
@@ -36,6 +37,8 @@ class Register extends Component {
 
         }
 
+        this.setState({ loading: true, error: "" });
+
         auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then((response) => {
 
@@ -47,9 +50,10 @@ class Register extends Component {
 
 
             })
-            .then((res) => {
+            .then((response) => {
                 this.props.navigation.navigate("Login")
-                console.log(res);
+                this.setState({ loading: false });
+                console.log(response);
 
                 console.log(auth.currentUser)
             })
@@ -71,7 +75,7 @@ class Register extends Component {
                     mensaje = "Ocurrió un error inesperado. Intenta nuevamente.";
                 }
 
-                this.setState({ error: mensaje });
+                this.setState({ error: mensaje, loading: false });
 
         
     })
@@ -83,6 +87,16 @@ class Register extends Component {
 
 
 render(){
+
+    if (this.state.loading) {
+        return (
+            <View style={styles.loadingContainer}>
+                <ActivityIndicator size="large" color="#6C63FF" />
+                <Text style={styles.texto}>Creando cuenta...</Text>
+            </View>
+        );
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}> Registrate </Text>
@@ -174,6 +188,15 @@ const styles = StyleSheet.create({
         marginTop: 15,
         fontSize: 15,
     },
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F7F8FA',
+    },
+    texto: {
+        marginTop: 10,
+    }
 });
 
 export default Register

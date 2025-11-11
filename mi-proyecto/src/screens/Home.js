@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, FlatList, Image } from 'react-native';
+import { Text, View, StyleSheet, FlatList, Image, ActivityIndicator } from 'react-native';
 import { db } from '../firebase/config';
 import Post from '../components/Post';
 import logo from "../../assets/logo.png.png"
@@ -8,7 +8,8 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posteos: []
+      posteos: [],
+      loading: true
     };
   }
 
@@ -23,7 +24,7 @@ class Home extends Component {
             doc.id, 
             data: doc.data() });
         });
-        this.setState({ posteos: posts });
+        this.setState({ posteos: posts, loading: false });
         console.log('Posteos:', this.state.posteos);
       },
       (error) => console.log(error)
@@ -31,6 +32,16 @@ class Home extends Component {
   }
 
   render() {
+
+    if (this.state.loading) {
+      return (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#6C63FF" />
+          <Text style={styles.texto}>Cargando posteos...</Text>
+        </View>
+      );
+    }
+
     return (
       <View style={styles.container}>
 
@@ -91,6 +102,15 @@ const styles = StyleSheet.create({
     marginBottom: 25,         
     fontStyle: 'italic',      
     paddingHorizontal: 20,    
+},
+loadingContainer: {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: '#F7F8FA',
+},
+texto: {
+    marginTop: 10,
 },
     
 });

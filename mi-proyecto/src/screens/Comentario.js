@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Pressable, TextInput, FlatList, StyleSheet } from 'react-native';
+import { View, Text, Pressable, TextInput, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
 import { db, auth } from '../firebase/config';
 import firebase from 'firebase';
 
@@ -8,7 +8,8 @@ class Comentario extends Component {
     super(props);
     this.state = {
       comentario: '',
-      comentarios: []
+      comentarios: [],
+      loading: true
     };
   }
 
@@ -19,7 +20,7 @@ class Comentario extends Component {
       .onSnapshot(doc => {
         if (doc.exists) {
           const data = doc.data();
-          this.setState({ comentarios: data.comentarios || [] });
+          this.setState({ comentarios: data.comentarios || [], loading: false });
         }
       });
   }
@@ -44,9 +45,23 @@ class Comentario extends Component {
   }
 
   render() {
+
+    if (this.state.loading) {
+      return (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#6C63FF" />
+          <Text style={styles.texto}>Cargando comentarios...</Text>
+        </View>
+      );
+    }
+
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Comentarios</Text>
+
+        <Pressable onPress={() => this.props.navigation.navigate('HomeMenu', { screen: 'Home' })} style={styles.backButton}>
+          <Text style={styles.backButtonText}>Volver</Text>
+        </Pressable>
 
         <FlatList
           data={this.state.comentarios}
@@ -79,17 +94,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 15,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   title: {
     fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 10
+    marginBottom: 10,
+    textAlign: 'center',
   },
   contenedorComentario: {
     borderBottomWidth: 1,
     borderColor: '#ccc',
-    paddingVertical: 8
+    paddingVertical: 8,
+    alignItems: 'center',
   },
   comentarioOwner: {
     fontWeight: 'bold',
@@ -117,7 +134,30 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontWeight: 'bold'
-  }
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F7F8FA',
+  },
+  texto: {
+    marginTop: 10,
+  },
+  backButton: {
+    backgroundColor: '#6C63FF',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 6,
+    alignSelf: 'flex-start',
+    marginTop: 10,
+    marginRight: 10,
+  },
+  backButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
 });
 
 export default Comentario;

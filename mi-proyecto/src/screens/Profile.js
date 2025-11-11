@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Pressable, FlatList, Image } from 'react-native';
+import { Text, View, StyleSheet, Pressable, FlatList, Image, ActivityIndicator } from 'react-native';
 import { db, auth } from '../firebase/config';
 import Post from '../components/Post';
 import logo from "../../assets/logo.png.png"
@@ -9,7 +9,8 @@ class Profile extends Component {
     super(props);
     this.state = {
       posteos: [],
-      username: ''
+      username: '',
+      loading: true
     };
   }
 
@@ -24,7 +25,7 @@ class Profile extends Component {
             data: doc.data()
           });
         });
-        this.setState({ posteos: posts });
+        this.setState({ posteos: posts, loading: false });
         console.log('Posteos:', this.state.posteos);
       },
       (error) => console.log(error)
@@ -34,7 +35,7 @@ class Profile extends Component {
       (docs) => {
         docs.forEach(doc => {
           const userData = doc.data();
-          this.setState({ username: userData.username });
+          this.setState({ username: userData.username, loading: false });
         });
       },
       (error) => console.log(error)
@@ -51,8 +52,13 @@ class Profile extends Component {
 
   render() {
 
-    if (!auth.currentUser) {
-      return <Text>Cargando perfil...</Text>
+    if (this.state.loading) {
+      return (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#6C63FF" />
+          <Text style={styles.texto}>Cargando perfil...</Text>
+        </View>
+      );
     }
 
     return (
@@ -72,7 +78,7 @@ class Profile extends Component {
             data={this.state.posteos}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <Post postData={item.data} postId={item.id} origen={"Profile"} />
+              <Post postData={item.data} postId={item.id} origen={"Profile"} navigation={this.props.navigation} />
             )}
           />
         )}
@@ -144,6 +150,15 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderRadius: 40, 
   },
+  loadingContainer: {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: '#F7F8FA',
+},
+texto: {
+    marginTop: 10,
+}
 });
 
 export default Profile

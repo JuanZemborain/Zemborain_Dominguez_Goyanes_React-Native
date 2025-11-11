@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, Pressable, StyleSheet, Image, ImageBackground } from 'react-native';
+import { Text, View, TextInput, Pressable, StyleSheet, Image, ImageBackground, ActivityIndicator } from 'react-native';
 import { db, auth } from '../firebase/config';
 
 class NuevoPost extends Component {
@@ -7,7 +7,8 @@ class NuevoPost extends Component {
     super(props);
     this.state = {
       description: '',
-      error: null
+      error: null,
+      loading: false
     };
   }
 
@@ -20,24 +21,29 @@ class NuevoPost extends Component {
         comentarios: []
     })
     .then(() => {
-      this.setState({ description: '' });
+      this.setState({ description: '', loading: false });
       this.props.navigation.navigate('HomeMenu');
     })
     .catch(error => {
       console.log(error);
-      this.setState({ error: 'Error al crear el post' });
+      this.setState({ error: 'Error al crear el post', loading: false });
     });
   }
 
   render() {
+
+    if (this.state.loading) {
+      return (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#6C63FF" />
+          <Text style={styles.texto}>Publicando...</Text>
+        </View>
+      );
+    }
+
     return (
         <View style={styles.container}>
         <Text style={styles.title}>Nuevo Post</Text>
-       
-        <Image
-         source={{uri: 'https://e1.pxfuel.com/desktop-wallpaper/538/178/desktop-wallpaper-colorful-music-background.jpg',}} 
-         style={styles.backgroundImage}
-        />
 
         <TextInput
           style={styles.input}
@@ -64,8 +70,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F7F9FC",
     padding: 25,
-    backgroundImage: "url(https://i.pinimg.com/736x/6c/d9/3b/6cd93b821fcc13847d63d97184870c19.jpg)"
-
   },
   title: {
     fontSize: 24,
@@ -101,7 +105,16 @@ const styles = StyleSheet.create({
   width: '100%',
   height: '100%',
   resizeMode: 'cover',
-},
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F7F8FA',
+  },
+  texto: {
+    marginTop: 10,
+  },
 });
 
 export default NuevoPost;
